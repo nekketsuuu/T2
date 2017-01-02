@@ -88,10 +88,12 @@ let normalize_var (v : string) =
 %%
 
 
-program : START COLON loc SEMICOLON CUTPOINT COLON loc SEMICOLON shadows blocks 
-        { ($3,$7,$10,$9,!incomplete_abstraction) }
-       |  START COLON loc SEMICOLON shadows blocks 
-        { ($3,NumLoc -1,$6,$5,!incomplete_abstraction) }
+program
+        : { (NumLoc -1, NumLoc -1, [], [], !incomplete_abstraction) }
+        | START COLON loc SEMICOLON CUTPOINT COLON loc SEMICOLON shadows blocks 
+         { ($3,$7,$10,$9,!incomplete_abstraction) }
+        |  START COLON loc SEMICOLON shadows blocks 
+         { ($3,NumLoc -1,$6,$5,!incomplete_abstraction) }
 
 
 blocks
